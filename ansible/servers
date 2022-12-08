@@ -1,0 +1,2 @@
+[slave]
+slave ansible_host=192.158.15.70

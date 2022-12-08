@@ -1,0 +1,44 @@
+---
+- hosts: slave
+  become: true
+  vars:
+  ansible_become_pass: mcalipo
+
+tasks:
+- name: Install Git
+  package:
+    name: git
+    state: present
+
+- name: Run update
+  apt:
+    update_cache: true
+
+- name: Install jdk
+  package:
+    name: default-jdk
+    state: present
+
+- name: Copy chromedriver
+  copy:
+    src: /home/mcalipo/chromedriver
+    dest: /home/mcalipo/
+
+- name: Install chromium browser
+  package:
+    name: chromium-browser
+    state: present
+
+- name: Install chromium driver
+  package:
+    name: chromium-chromedriver
+    state: present
+
+- name: Copy agent.jar file
+  copy:
+    src: /home/mcalipo/agent.jar
+    dest: /home/mcalipo
+
+- name: Run update
+  apt:
+    update_cache: yes
